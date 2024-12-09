@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthsary</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: #f0f0f0;
+            overflow: hidden;
+            cursor: none; /* Hide the default cursor */
+        }
+
+        .background-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: bold;
+            color: transparent; /* Make the text color transparent to apply the gradient */
+            background: linear-gradient(45deg, black, red, black); /* Gradient with white, red, and black */
+            -webkit-background-clip: text; /* Clip the background to the text */
+            background-clip: text; /* Clip the background to the text */
+            letter-spacing: 5px;
+            text-align: center;
+            z-index: -1; /* Sends the text to the background */
+            user-select: none; /* Prevents text selection */
+        }
+
+        .hover-image {
+        position: absolute;
+        width: 150px; /* Adjust the size of each image */
+        height: 200px; /* Adjust the size of each image */
+        background-size: cover;
+        background-position: center;
+        border: 5px solid white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        pointer-events: none; /* Prevent interaction with the images */
+        animation: fadeOut 1s ease-out forwards; /* Add fade-out animation */
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+    }
+
+        /* Sparkle shapes */
+        .spark {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: sparkle 1.5s infinite;
+        }
+
+        .spark.circle {
+            background-color: pink;
+            width: 20px;
+            height: 20px;
+            animation-duration: 1.5s;
+        }
+
+        .spark.star {
+            background-color: red;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            width: 20px;
+            height: 20px;
+            animation-duration: 2s;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Text -->
+    <div class="background-text">
+        Happy<br>61st<br>Monthsary
+    </div>
+
+    <div id="hoverImage" class="hover-image"></div>
+
+    <div class="spark circle" style="top: 30%; left: 20%;"></div>
+    <div class="spark circle" style="top: 40%; left: 70%;"></div>
+    <div class="spark star" style="top: 60%; left: 50%;"></div>
+    <div class="spark circle" style="top: 10%; left: 80%;"></div>
+    <div class="spark star" style="top: 80%; left: 10%;"></div>
+
+    <script>
+        const hoverImage = document.getElementById('hoverImage');
+        
+        // Array of image URLs
+        const images = [
+            "images/1.jpg",
+            "images/2.jpg",
+            "images/3.jpg",
+            "images/4.jpg",
+            "images/5.jpg",
+            "images/6.jpg",
+            "images/7.jpg",
+            "images/8.jpg",
+            "images/9.jpg",
+            "images/10.jpg",
+            "images/11.jpg",
+            "images/12.jpg",
+            "images/13.jpg",
+            "images/14.jpg",
+            "images/15.jpg",
+            "images/16.jpg",
+            "images/17.jpg",
+            "images/18.jpg",
+            "images/19.jpg",
+            "images/20.jpg",
+            "images/21.jpg",
+            "images/22.jpg",
+            "images/23.jpg",
+            "images/24.jpg",
+            "images/25.jpg",
+            "images/26.jpg",
+            "images/27.jpg",
+            "images/28.jpg",
+            "images/29.jpg",
+            "images/30.jpg",
+            "images/31.jpg",
+            "images/32.jpg",
+            "images/33.jpg",
+            "images/34.jpg",
+            "images/35.jpg",
+            "images/36.jpg",
+            "images/37.jpg",
+            "images/38.jpg",
+            "images/39.jpg",
+            "images/40.jpg",
+            "images/41.jpg",
+            "images/42.jpg",
+            "images/43.jpg",
+            "images/44.jpg",
+            "images/45.jpg",
+            "images/46.jpg",
+            "images/47.jpg",
+            "images/48.jpg",
+            "images/49.jpg",
+            "images/50.jpg",
+            "images/51.jpg",
+            "images/52.jpg",
+            "images/53.jpg",
+            "images/54.jpg",
+            "images/55.jpg",
+            "images/56.jpg",
+            "images/57.jpg",
+            "images/58.jpg",
+            "images/59.jpg",
+            "images/60.jpg",
+            "images/61.jpg",
+            "images/62.jpg",
+            "images/63.jpg",
+            "images/64.jpg",
+            "images/65.jpg"
+        ];
+
+        let imageIndex = 0; // To track the current image
+
+    document.addEventListener('mousemove', (e) => {
+        // Create a new image element for each mousemove event
+        const imgElement = document.createElement('div');
+        imgElement.className = 'hover-image';
+        imgElement.style.left = `${e.pageX}px`;
+        imgElement.style.top = `${e.pageY}px`;
+        imgElement.style.backgroundImage = `url(${images[imageIndex]})`;
+
+        // Add the image to the body
+        document.body.appendChild(imgElement);
+
+        // Cycle to the next image in the array
+        imageIndex = (imageIndex + 1) % images.length;
+
+        // Remove the image after 1 second (1000ms)
+        setTimeout(() => {
+            imgElement.remove();
+        }, 1000); // Adjust the duration as needed
+    });
+    </script>
+</body>
+</html>
